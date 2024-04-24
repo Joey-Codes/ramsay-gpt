@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Sidebar from "./components/sidebar";
 import ToggleContextProvider from "./components/toggleprovider";
 import SidebarContextProvider from "./components/sidebarprovider";
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +19,6 @@ export default function RootLayout({ children, }: Readonly<{children: React.Reac
             <div className="container-fluid">
               <div className="row">
                 <div className="col-md-1">
-                  <Sidebar />
                 </div>
                 <div className="col-md-11">
                   {children}

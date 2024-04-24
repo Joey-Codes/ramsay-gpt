@@ -2,20 +2,33 @@
 
 import Toggle from "./toggle";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useContext, FC } from "react";
 import { ToggleContext } from "./toggleprovider";
 import { SidebarContext } from "./sidebarprovider";
 import { useIsMobile } from "../hooks/useIsMobile";
 import "../globals.css";
 
-export default function Sidebar() {
+type MessageType = {
+  role: "user" | "assistant";
+  content: string;
+}
+
+interface SidebarProps {
+  conversations: MessageType[][];
+}
+
+const Sidebar: FC<SidebarProps> = ({conversations}) => {
   const { isToggled } = useContext(ToggleContext);
-  const { isHidden, toggleHidden } = useContext(SidebarContext);
+  const { isHidden, toggleHidden, changeConvo } = useContext(SidebarContext);
   const isMobile = useIsMobile();
 
   const handleHideSidebar = () => {
     toggleHidden();
-  }
+  };
+
+  const handleChangeConvo = (index: number) => {
+    changeConvo(index);
+  };
 
   return (
     <div className={`offcanvas offcanvas-start ${isMobile ? (isHidden ? "" : "show") : "show"} ${isToggled ? `bg-customdark` : `bg-light`}`} tabIndex={-1} id="offcanvas" aria-labelledby="offcanvasLabel" style={{"borderRight": "none"}} >
@@ -47,15 +60,11 @@ export default function Sidebar() {
         <div className="offcanvas-body mt-5">
           <div className="overflow-auto"> 
             <h3 className='fs-5 mb-4' style={{color: "#B4B4B4"}}>Previous Conversations</h3>
-            <button className={`d-flex align-items-center btn ${isToggled ? "btn-dark-custom" : "btn-light"} col-12 mt-2`} style={{fontFamily: "Sohne", textAlign: "left"}}>
-              <h5 style={{paddingRight: '10px'}}>Conversation Name</h5>
-            </button>
-            <button className={`d-flex align-items-center btn ${isToggled ? "btn-dark-custom" : "btn-light"} col-12 mt-2`} style={{fontFamily: "Sohne", textAlign: "left"}}>
-              <h5 style={{paddingRight: '10px'}}>Conversation Name</h5>
-            </button>
-            <button className={`d-flex align-items-center btn ${isToggled ? "btn-dark-custom" : "btn-light"} col-12 mt-2`} style={{fontFamily: "Sohne", textAlign: "left"}}>
-              <h5 style={{paddingRight: '10px'}}>Conversation Name</h5>
-            </button>
+            {conversations.length > 0 && conversations.map((conversation, index) => (
+              <button className={`d-flex align-items-center btn ${isToggled ? "btn-dark-custom" : "btn-light"} col-12 mt-2`} style={{fontFamily: "Sohne", textAlign: "left"}} onClick={() => handleChangeConvo(index)}>
+                <h5 style={{paddingRight: '10px'}}>Conversation Name</h5>
+              </button>
+            ))}
           </div>
         </div>
         <div className="mt-auto">
@@ -68,3 +77,5 @@ export default function Sidebar() {
       </div>
     );
   }
+
+  export default Sidebar;
