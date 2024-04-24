@@ -23,7 +23,10 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
   const { isHidden, toggleHidden, changeConvo } = useContext(SidebarContext);
   const [prevLength, setPrevLength] = useState(0);
   const [chatSummaries, setChatSummaries] = useState<string[]>([]);
+  const [sidebarConvos, setSidebarConvos] = useState<MessageType[][]>([]);
+  const [activeButton, setActiveButton] = useState(-1);
   const isMobile = useIsMobile();
+  
 
   const handleHideSidebar = () => {
     toggleHidden();
@@ -31,6 +34,7 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
 
   const handleChangeConvo = (index: number) => {
     changeConvo(index);
+    setActiveButton(index);
     toggleHidden();
   };
 
@@ -39,8 +43,17 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
     const updatedConvos = [...conversations, newChat];
     const newIndex = updatedConvos.length - 1;
     changeConvo(newIndex);
+    setActiveButton(-1);
     toggleHidden();
   };
+
+  useEffect(() => {
+    if (conversations.length > 0 && conversations[conversations.length - 1].length === 0) {
+      setSidebarConvos(conversations.slice(0, -1));
+    } else {
+      setSidebarConvos(conversations);
+    }
+  }, [conversations]);
 
   useEffect(() => {
     const fetchChatSummary = async () => {
@@ -64,7 +77,6 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
     fetchChatSummary();
     
   }, [conversations]);
-  
 
   return (
     <div className={`offcanvas offcanvas-start ${isMobile ? (isHidden ? "" : "show") : "show"} ${isToggled ? `bg-customdark` : `bg-light`}`} tabIndex={-1} id="offcanvas" aria-labelledby="offcanvasLabel" style={{"borderRight": "none"}} >
@@ -96,9 +108,10 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
         <div className="offcanvas-body mt-5">
           <div className="overflow-auto"> 
             <h3 className='fs-5 mb-4' style={{color: "#B4B4B4"}}>Conversations</h3>
-            {conversations.length > 0 && conversations.map((conversation, index) => (
-              <button className={`d-flex align-items-center btn ${isToggled ? "btn-dark-custom" : "btn-light"} col-12 mt-2`} style={{fontFamily: "Sohne", textAlign: "left"}} onClick={() => handleChangeConvo(index)}>
-                <h5 className="" style={{paddingRight: '10px'}}>{chatSummaries[index]}</h5>
+            {sidebarConvos.length > 0 && sidebarConvos.map((conversation, index) => (
+              <button 
+                className={`d-flex align-items-center btn ${isToggled ? (activeButton === index ?  "bg-customgray-active" : "btn-dark-custom") : "btn-light"} ${activeButton === index ? (isToggled ? "" : "bg-customgray2") : ""} col-12 mt-2`} style={{fontFamily: "Sohne", textAlign: "left"}} onClick={() => handleChangeConvo(index)}>
+                <h5 style={{paddingRight: '10px'}}>{chatSummaries[index]}</h5>
               </button>
             ))}
           </div>

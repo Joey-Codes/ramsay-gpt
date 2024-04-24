@@ -73,6 +73,11 @@ body {
   background-color: #212121;
 }
 
+.bg-customgray-active {
+  background-color: #212121;
+  color: #fff;
+}
+
 .bg-customgray2 {
   background-color: #e5e5e5;
 }

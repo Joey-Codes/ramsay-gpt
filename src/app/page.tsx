@@ -91,7 +91,7 @@ export default function Home() {
     <>
       <Sidebar conversations={chatWindows}/>
       <div className={`container-fluid ${isToggled ? 'bg-customgray' : 'bg-white'}`} style={{minHeight: '100vh'}}>
-        <div className={`d-flex justify-content-center align-items-center ${isMobile ? 'flex-column text-align' : 'pt-5'}`}>
+        <div className={`d-flex justify-content-center align-items-center ${isMobile ? 'flex-column text-align border-bottom' : 'pt-5'}`}>
           <div className='d-flex mt-3'>
             {isMobile && (
               <button type="button" style={{border: 'none', backgroundColor: isToggled ? '#212121' : 'white', color: isToggled ? "white" : "black"}} onClick={handleHideSidebar}>
