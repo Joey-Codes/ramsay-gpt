@@ -15,10 +15,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const { userMessage } = req.body;
         const completion = await openAI.chat.completions.create({
-            messages: [{"role": "system", "content": "You are a helpful assistant."}],
+            messages: [
+                {"role": "system", "content": "Summarize the topic of the user message in 4 words max"},
+                {"role": "user", "content": userMessage},
+            ],
             model: "gpt-3.5-turbo-0125",
             temperature: 0.7,
-            max_tokens: 100,
+            max_tokens: 20,
         });
 
         const botReply = completion.choices[0].message.content; 

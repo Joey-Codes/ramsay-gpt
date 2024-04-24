@@ -18,14 +18,7 @@ export default function Home() {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [chatWindows, setChatWindows] = useState<MessageType[][]>([
-    [
-      {role: "user", content: "convo 1"}
-    ],
-    [
-      {role: "user", content: "convo 2"}
-    ]
-  ]);
+  const [chatWindows, setChatWindows] = useState<MessageType[][]>([[]]);
   const { isToggled } = useContext(ToggleContext);
   const isMobile = useIsMobile();
   const { selectedChatIndex, changeConvo, toggleHidden } = useContext(SidebarContext);
@@ -86,6 +79,14 @@ export default function Home() {
     }
   };
 
+  if (selectedChatIndex === chatWindows.length) {
+    if (!chatWindows[selectedChatIndex - 1].length) {
+      changeConvo(selectedChatIndex - 1);
+    } else {
+      setChatWindows(prevChatWindows => [...prevChatWindows, []]);
+    }
+  };
+
   return (
     <>
       <Sidebar conversations={chatWindows}/>
@@ -93,7 +94,7 @@ export default function Home() {
         <div className={`d-flex justify-content-center align-items-center ${isMobile ? 'flex-column text-align' : 'pt-5'}`}>
           <div className='d-flex mt-3'>
             {isMobile && (
-              <button type="button" style={{border: 'none', backgroundColor: 'white'}} onClick={handleHideSidebar}>
+              <button type="button" style={{border: 'none', backgroundColor: isToggled ? '#212121' : 'white', color: isToggled ? "white" : "black"}} onClick={handleHideSidebar}>
                 <svg width="34" height="34" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M3 8C3 7.44772 3.44772 7 4 7H20C20.5523 7 21 7.44772 21 8C21 8.55228 20.5523 9 20 9H4C3.44772 9 3 8.55228 3 8ZM3 16C3 15.4477 3.44772 15 4 15H14C14.5523 15 15 15.4477 15 16C15 16.5523 14.5523 17 14 17H4C3.44772 17 3 16.5523 3 16Z" fill="currentColor"></path>
                 </svg>

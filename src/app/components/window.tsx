@@ -23,7 +23,7 @@ export default function Window({ messages }: { messages: MessageType[] }) {
   return (
     <div className={`container ${isToggled ? `bg-customgray` : `bg-white`}`} style={{ height: isMobile ? '65vh' : '70vh', width: isMobile ? '100%': '50vw', overflowY: 'auto', paddingTop: '30px', marginTop: '50px'}}>
       <div>
-        {messages.length === 0 && (
+        {messages != undefined && messages.length === 0 && (
           <div style={{ position: 'absolute', top: '45%', left: isMobile ? '50%': '53%', transform: 'translate(-50%, -50%)', zIndex: 999 }}>
             <Image
               src="/gordon-ramsay.png"
@@ -35,7 +35,7 @@ export default function Window({ messages }: { messages: MessageType[] }) {
             <h2 className={`${isToggled ? `text-white` : `text-black`}`} style={{ position: 'relative', textAlign: 'center', width: '100%'}}>How can I help you today?</h2>
           </div>
         )}
-        {messages.map((message, index) => (
+        {messages != undefined && messages.map((message, index) => (
           <div className="row" key={index}>
             {message.role === "assistant" && (
               <div className="col-auto">
