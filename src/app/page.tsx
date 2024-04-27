@@ -132,7 +132,7 @@ export default function Home() {
                     </svg>
                 </button>
               </div>
-              <div className="text-center mt-3" style={{color: '#9b9b9b', fontSize: isMobile ? '11px' : '15px'}}><span>Note: GordonRamsayGPT is meant to be very insulting. So if you can't take the heat, get out of the kitchen.</span></div>
+              <div className="text-center mt-3" style={{color: '#9b9b9b', fontSize: isMobile ? '11px' : '15px'}}><span>Note: GordonRamsayGPT is meant to be very insulting. So if you can&apos;t take the heat, get out of the kitchen.</span></div>
             </div>
           </div>
         </div>
