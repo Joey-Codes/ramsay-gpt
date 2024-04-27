@@ -13,21 +13,17 @@ export default function RootLayout({ children, }: Readonly<{children: React.Reac
 
   return (
     <html lang="en">
-      <ToggleContextProvider>
-        <SidebarContextProvider>
-          <body>
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-md-1">
-                </div>
-                <div className="col-md-11">
-                  {children}
-                </div>
-              </div>
+      <head>
+      </head>
+      <body>
+        <ToggleContextProvider>
+          <SidebarContextProvider>
+            <div id="app">
+              {children}
             </div>
-          </body>
-        </SidebarContextProvider>
-      </ToggleContextProvider>
+          </SidebarContextProvider>
+        </ToggleContextProvider>
+      </body>
     </html>
   );
 }
