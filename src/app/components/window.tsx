@@ -15,13 +15,13 @@ export default function Window({ messages }: { messages: MessageType[] }) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (messagesEndRef.current) {
+    if (messages.length > 0 && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);
 
   return (
-    <div className={`container ${isToggled ? `bg-customgray` : `bg-white`}`} style={{ height: isMobile ? '65vh' : '70vh', width: isMobile ? '100%': '50vw', overflowY: 'auto', marginTop: '30px'}}>
+    <div className={`container ${isToggled ? `bg-customgray` : `bg-white`}`} style={{ height: isMobile ? '60vh' : '70vh', width: isMobile ? '100%': '50vw', overflowY: 'auto', marginTop: '30px'}}>
       <div>
         {messages != undefined && messages.length === 0 && (
           <div style={{ position: 'absolute', top: '45%', left: isMobile ? '50%': '53%', transform: 'translate(-50%, -50%)', zIndex: 999 }}>
