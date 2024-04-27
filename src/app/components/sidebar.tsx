@@ -76,7 +76,7 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
 
     fetchChatSummary();
     
-  }, [conversations]);
+  }, [conversations, prevLength]);
 
   return (
     <div className={`offcanvas offcanvas-start ${isMobile ? (isHidden ? "" : "show") : "show"} ${isToggled ? `bg-customdark` : `bg-light`}`} tabIndex={-1} id="offcanvas" aria-labelledby="offcanvasLabel" style={{"borderRight": "none"}} >
@@ -110,6 +110,7 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
             <h3 className='fs-5 mb-4' style={{color: "#B4B4B4"}}>Conversations</h3>
             {sidebarConvos.length > 0 && sidebarConvos.map((conversation, index) => (
               <button 
+                key={index}
                 className={`d-flex align-items-center btn ${isToggled ? (activeButton === index ?  "bg-customgray-active" : "btn-dark-custom") : "btn-light"} ${activeButton === index ? (isToggled ? "" : "bg-customgray2") : ""} col-12 mt-2`} style={{fontFamily: "Sohne", textAlign: "left"}} onClick={() => handleChangeConvo(index)}>
                 <h5 style={{paddingRight: '10px'}}>{chatSummaries[index]}</h5>
               </button>
