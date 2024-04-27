@@ -15,7 +15,7 @@ export default function Window({ messages }: { messages: MessageType[] }) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (messages.length > 0 && messagesEndRef.current) {
+    if (messages && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);

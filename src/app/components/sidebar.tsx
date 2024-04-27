@@ -89,7 +89,7 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
                   height={40}
                   style={{borderRadius: '50%', paddingRight: '10px'}} 
                 />
-              <h4 className="mt-2" style={{ paddingRight: isMobile ? '100px' : '150px' }}>New chat</h4>
+              <h4 className="mt-2" style={{ paddingRight: isMobile ? '80px' : '150px' }}>New chat</h4>
               <svg 
                 width="24" 
                 height="24" 
@@ -105,9 +105,9 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
               </button>
               <button type="button" className={`btn-close ${isToggled ? "btn-close-white" : ""} mb-5 text-reset ${isMobile ? "" : "d-none"}`} data-bs-dismiss="offcanvas" aria-label="Close" onClick={handleHideSidebar}></button>
         </div>
-        <div className="offcanvas-body mt-5">
-          <div className="overflow-auto"> 
+        <div className="offcanvas-body mt-5" style={{minHeight: "300px"}}>
             <h3 className='fs-5 mb-4' style={{color: "#B4B4B4"}}>Conversations</h3>
+            <div className="overflow-auto"> 
             {sidebarConvos.length > 0 && sidebarConvos.map((conversation, index) => (
               <button 
                 key={index}
