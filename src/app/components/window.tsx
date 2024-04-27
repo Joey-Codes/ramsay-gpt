@@ -32,7 +32,7 @@ export default function Window({ messages }: { messages: MessageType[] }) {
               height={isMobile? 50: 100}
               style={{ display: 'block', margin: '0 auto' }} 
             />
-            <h2 className={`${isToggled ? `text-white` : `text-black`}`} style={{ position: 'relative', textAlign: 'center', width: '100%'}}>How can I help you today?</h2>
+            <h2 className={`${isToggled ? `text-white` : `text-black`}`} style={{ position: 'relative', textAlign: 'center', width: '100%'}}>What do you need, you donkey?</h2>
           </div>
         )}
         {messages != undefined && messages.map((message, index) => (

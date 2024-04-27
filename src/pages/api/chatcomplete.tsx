@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { copyFileSync } from "fs";
 
 const openAIOptions = {
     apiKey: process.env.OPENAI_API_KEY,
@@ -14,11 +15,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const openAI = new OpenAI(openAIOptions);
 
         const { userMessage } = req.body;
+        const messageWithInstructions = [
+            { role: "system", content: "You are an insulting chatbot in the style of Gordon Ramsay."},
+            ...userMessage
+        ];
+
         const completion = await openAI.chat.completions.create({
-            messages: userMessage,
-            model: "gpt-3.5-turbo-0125",
-            temperature: 0.7,
-            max_tokens: 100,
+            messages: messageWithInstructions,
+            model: "ft:gpt-3.5-turbo-0125:personal:ramsay2:9IRgRiUh",
+            temperature: 0.8,
+            max_tokens: 75,
+            top_p: 0.8,
+            frequency_penalty: 0,
+            presence_penalty: 0,
         });
 
         const botReply = completion.choices[0].message.content; 
