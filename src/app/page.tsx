@@ -90,7 +90,7 @@ export default function Home() {
   return (
     <>
       <Sidebar conversations={chatWindows}/>
-      <div className={`container-fluid ${isToggled ? 'bg-customgray' : 'bg-white'}`} style={{height: '100vh'}}>
+      <div className={`container-fluid ${isToggled ? 'bg-customgray' : 'bg-white'}`} style={{height: isMobile ? '93vh' : '100vh'}}>
         <div className={`d-flex justify-content-center align-items-center ${isMobile ? 'flex-column text-align border-bottom' : 'pt-5'}`}>
           <div className='d-flex mt-3'>
             {isMobile && (

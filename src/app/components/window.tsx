@@ -13,14 +13,12 @@ export default function Window({ messages }: { messages: MessageType[] }) {
   const { isToggled } = useContext(ToggleContext);
   const isMobile = useIsMobile();
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [shouldScroll, setShouldScroll] = useState(true);
 
   useEffect(() => {
-    if (shouldScroll && messages && messagesEndRef.current) {
+    if (messages && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-      setShouldScroll(false);
     }
-  }, [messages, shouldScroll]);
+  }, [messages]);
 
   return (
     <div className={`container ${isToggled ? `bg-customgray` : `bg-white`}`} style={{ height: isMobile ? '60vh' : '70vh', width: isMobile ? '100%': '50vw', overflowY: 'auto', marginTop: '30px'}}>
