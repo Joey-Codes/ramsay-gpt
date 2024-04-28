@@ -18,11 +18,10 @@ interface SidebarProps {
 
 const Sidebar: FC<SidebarProps> = ({conversations}) => {
   const { isToggled } = useContext(ToggleContext);
-  const { isHidden, toggleHidden, changeConvo } = useContext(SidebarContext);
+  const { changeConvo, activeButton, changeActive, isHidden, toggleHidden } = useContext(SidebarContext);
   const [prevLength, setPrevLength] = useState(0);
   const [chatSummaries, setChatSummaries] = useState<string[]>([]);
   const [sidebarConvos, setSidebarConvos] = useState<MessageType[][]>([]);
-  const [activeButton, setActiveButton] = useState(-1);
   const isMobile = useIsMobile();
   
 
@@ -32,7 +31,7 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
 
   const handleChangeConvo = (index: number) => {
     changeConvo(index);
-    setActiveButton(index);
+    changeActive(index);
     toggleHidden();
   };
 
@@ -41,7 +40,7 @@ const Sidebar: FC<SidebarProps> = ({conversations}) => {
     const updatedConvos = [...conversations, newChat];
     const newIndex = updatedConvos.length - 1;
     changeConvo(newIndex);
-    setActiveButton(-1);
+    changeActive(-1);
     toggleHidden();
   };
 

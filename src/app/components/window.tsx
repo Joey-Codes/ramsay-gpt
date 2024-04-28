@@ -24,15 +24,15 @@ export default function Window({ messages }: { messages: MessageType[] }) {
     <div className={`container ${isToggled ? `bg-customgray` : `bg-white`}`} style={{ height: isMobile ? '60vh' : '70vh', width: isMobile ? '100%': '50vw', overflowY: 'auto', marginTop: '30px'}}>
       <div>
         {messages != undefined && messages.length === 0 && (
-          <div style={{ position: 'absolute', top: '45%', left: isMobile ? '50%': '53%', transform: 'translate(-50%, -50%)', zIndex: 999 }}>
+          <div style={{ position: 'absolute', top: '45%', left: isMobile ? '50%': '53%', transform: 'translate(-50%, -50%)'}}>
             <Image
               src="/gordon-ramsay.png"
               alt='gordon-ramsay'
-              width={isMobile ? 100 : 200}
-              height={isMobile? 50: 100}
+              width={isMobile ? 140 : 200}
+              height={isMobile? 80: 110}
               style={{ display: 'block', margin: '0 auto' }} 
             />
-            <h2 className={`${isToggled ? `text-white` : `text-black`}`} style={{ position: 'relative', textAlign: 'center', width: '100%'}}>What do you need, you donkey?</h2>
+            <h2 className={`${isToggled ? `text-white` : `text-black`}`} style={{ position: 'relative', textAlign: 'center', width: '100%'}}>What do you want, you donkey?</h2>
           </div>
         )}
         {messages != undefined && messages.map((message, index) => (
