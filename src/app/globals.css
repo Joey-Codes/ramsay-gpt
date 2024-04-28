@@ -62,11 +62,11 @@ body {
 }
 
 .input-group-custom-m input {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .input-group-custom-m input::placeholder {
-  font-size: 15px; 
+  font-size: 16px; 
 }
   
 .bg-customgray {

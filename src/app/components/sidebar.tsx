@@ -1,8 +1,6 @@
-'use client'
-
 import Toggle from "./toggle";
 import Image from "next/image";
-import { useContext, FC, useEffect, useRef, useState } from "react";
+import { useContext, FC, useEffect, useState } from "react";
 import { ToggleContext } from "./toggleprovider";
 import { SidebarContext } from "./sidebarprovider";
 import { useIsMobile } from "../hooks/useIsMobile";

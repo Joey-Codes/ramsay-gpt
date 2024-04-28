@@ -1,6 +1,6 @@
 import '../globals.css';
 import Image from "next/image";
-import { useContext, useRef, useEffect } from 'react';
+import { useContext, useRef, useEffect, useState } from 'react';
 import { ToggleContext } from './toggleprovider';
 import { useIsMobile } from '../hooks/useIsMobile';
 
@@ -13,12 +13,14 @@ export default function Window({ messages }: { messages: MessageType[] }) {
   const { isToggled } = useContext(ToggleContext);
   const isMobile = useIsMobile();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [shouldScroll, setShouldScroll] = useState(true);
 
   useEffect(() => {
-    if (messages && messagesEndRef.current) {
+    if (shouldScroll && messages && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      setShouldScroll(false);
     }
-  }, [messages]);
+  }, [messages, shouldScroll]);
 
   return (
     <div className={`container ${isToggled ? `bg-customgray` : `bg-white`}`} style={{ height: isMobile ? '60vh' : '70vh', width: isMobile ? '100%': '50vw', overflowY: 'auto', marginTop: '30px'}}>
