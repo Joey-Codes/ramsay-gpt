@@ -15,10 +15,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const openAI = new OpenAI(openAIOptions);
 
         const { userMessage } = req.body;
+
+        const conversationContext = userMessage.length > 5 ? userMessage.slice(-5) : userMessage;
+
         const messageWithInstructions = [
             { role: "system", content: "You are an insulting chatbot in the style of Gordon Ramsay."},
-            ...userMessage
+            ...conversationContext
         ];
+
+        console.log(messageWithInstructions);
 
         const completion = await openAI.chat.completions.create({
             messages: messageWithInstructions,
