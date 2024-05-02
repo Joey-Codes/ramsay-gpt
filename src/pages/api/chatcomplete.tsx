@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const conversationContext = userMessage.length > 5 ? userMessage.slice(-5) : userMessage;
 
         const messageWithInstructions = [
-            { role: "system", content: "You are an insulting chatbot in the style of Gordon Ramsay."},
+            { role: "system", content: "You are an angry chatbot in the style of Gordon Ramsay."},
             ...conversationContext
         ];
 
@@ -27,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const completion = await openAI.chat.completions.create({
             messages: messageWithInstructions,
-            model: "ft:gpt-3.5-turbo-0125:personal:ramsay2:9IRgRiUh",
+            model: "ft:gpt-3.5-turbo-0125:personal:ramsay3:9KGu6svv",
             temperature: 0.8,
             max_tokens: 75,
             top_p: 0.8,

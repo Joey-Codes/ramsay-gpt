@@ -38,3 +38,4 @@ next-env.d.ts
 .env
 trainingdata.jsonl
 trainingdata2.jsonl
+trainingdata3.jsonl

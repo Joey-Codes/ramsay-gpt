@@ -58,8 +58,18 @@ export default function Home() {
   
   const getResponse = async (messages: MessageType[], windowIndex: number) => {
     try {
+      setChatWindows(prevChatWindows => {
+        const updatedChatWindows = [...prevChatWindows];
+        updatedChatWindows[windowIndex] = [
+          ...messages,
+          { role: "assistant", content: "/loading-dots.gif" }
+        ];
+        return updatedChatWindows;
+      });
+  
       const response = await axios.post('/api/chatcomplete', { userMessage: messages });
       const botReply = response.data.botReply;
+  
       setChatWindows(prevChatWindows => {
         const updatedChatWindows = [...prevChatWindows];
         updatedChatWindows[windowIndex] = [
@@ -108,7 +118,7 @@ export default function Home() {
                 </svg>
               </button>
             )}
-            <h1 className={`${isToggled ? 'text-white' : 'text-black'} ${isMobile ? 'ms-4 mt-2 me-4 fs-4' : 'me-5 fs-2'}`}>GordonRamsayGPT</h1>
+            <h1 className={`${isToggled ? 'text-white' : 'text-black'} ${isMobile ? 'ms-4 mt-2 me-4 fs-4' : 'fs-2'}`}>GordonRamsayGPT</h1>
             {isMobile && (
               <button type="button" style={{border: 'none', backgroundColor: isToggled ? '#212121' : 'white', color: isToggled ? "white" : "black"}} onClick={handleNewChat}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -49,9 +49,19 @@ export default function Window({ messages }: { messages: MessageType[] }) {
               </div>
             )}
             <div className={`col`}>
-            <div className={message.role === "assistant" ? (isMobile ? "bot-message-m" : "bot-message") : (isMobile ? "user-message-m" : "user-message")}>
-              {message.content}
-            </div>
+              <div className={message.role === "assistant" ? (isMobile ? "bot-message-m" : "bot-message") : (isMobile ? "user-message-m" : "user-message")}>
+                {message.role === "assistant" && message.content.endsWith(".gif") ? ( 
+                  <Image
+                    src={message.content} 
+                    alt='loading-dots'
+                    width='75'
+                    height='75'
+                    style={{ display: 'block', margin: '0 auto' }} 
+                  />
+                ) : (
+                  message.content 
+                )}
+              </div>
             </div>
           </div>
         ))}
